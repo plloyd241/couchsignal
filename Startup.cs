@@ -17,21 +17,21 @@ namespace CouchSignal
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
-        private readonly IWebHostEnvironment _env;
+        public IConfiguration Config { get; }
+        private readonly IWebHostEnvironment Env;
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
-            Configuration = configuration;
-            _env = environment;
+            Config = configuration;
+            Env = environment;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            if (_env.IsDevelopment())
+            if (Env.IsDevelopment())
             {
-                services.AddDbContext<DataContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("DataContext")));
+                services.AddDbContext<DataContext>(opt => opt.UseSqlite(Config.GetConnectionString("DataContext")));
             }
 
             services.AddControllers();
@@ -40,7 +40,7 @@ namespace CouchSignal
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            if (_env.IsDevelopment())
+            if (Env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

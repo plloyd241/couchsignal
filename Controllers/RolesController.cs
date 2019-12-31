@@ -12,48 +12,48 @@ namespace CouchSignal.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DevicesController : ControllerBase
+    public class RolesController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public DevicesController(DataContext context)
+        public RolesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Devices
+        // GET: api/Roles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Device>>> GetDevices()
+        public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
-            return await _context.Devices.ToListAsync();
+            return await _context.Roles.ToListAsync();
         }
 
-        // GET: api/Devices/5
+        // GET: api/Roles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Device>> GetDevice(long id)
+        public async Task<ActionResult<Role>> GetRole(long id)
         {
-            var device = await _context.Devices.FindAsync(id);
+            var role = await _context.Roles.FindAsync(id);
 
-            if (device == null)
+            if (role == null)
             {
                 return NotFound();
             }
 
-            return device;
+            return role;
         }
 
-        // PUT: api/Devices/5
+        // PUT: api/Roles/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDevice(long id, Device device)
+        public async Task<IActionResult> PutRole(long id, Role role)
         {
-            if (id != device.ID)
+            if (id != role.ID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(device).State = EntityState.Modified;
+            _context.Entry(role).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace CouchSignal.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DeviceExists(id))
+                if (!RoleExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace CouchSignal.Controllers
             return NoContent();
         }
 
-        // POST: api/Devices
+        // POST: api/Roles
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Device>> PostDevice(Device device)
+        public async Task<ActionResult<Role>> PostRole(Role role)
         {
-            _context.Devices.Add(device);
+            _context.Roles.Add(role);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDevice", new { id = device.ID }, device);
+            return CreatedAtAction("GetRole", new { id = role.ID }, role);
         }
 
-        // DELETE: api/Devices/5
+        // DELETE: api/Roles/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Device>> DeleteDevice(long id)
+        public async Task<ActionResult<Role>> DeleteRole(long id)
         {
-            var device = await _context.Devices.FindAsync(id);
-            if (device == null)
+            var role = await _context.Roles.FindAsync(id);
+            if (role == null)
             {
                 return NotFound();
             }
 
-            _context.Devices.Remove(device);
+            _context.Roles.Remove(role);
             await _context.SaveChangesAsync();
 
-            return device;
+            return role;
         }
 
-        private bool DeviceExists(long id)
+        private bool RoleExists(long id)
         {
-            return _context.Devices.Any(e => e.ID == id);
+            return _context.Roles.Any(e => e.ID == id);
         }
     }
 }

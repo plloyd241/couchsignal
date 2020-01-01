@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CouchSignal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191231054855_RemoveDateTimes")]
-    partial class RemoveDateTimes
+    [Migration("20200101175521_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

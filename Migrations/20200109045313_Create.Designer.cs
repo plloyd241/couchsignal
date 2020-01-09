@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CouchSignal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200109044437_AddTasks")]
-    partial class AddTasks
+    [Migration("20200109045313_Create")]
+    partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

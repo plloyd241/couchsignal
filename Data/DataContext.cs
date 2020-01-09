@@ -10,5 +10,6 @@ namespace CouchSignal.Data
 
         public DbSet<Device> Devices { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Task> Tasks { get; set; }
     }
 }

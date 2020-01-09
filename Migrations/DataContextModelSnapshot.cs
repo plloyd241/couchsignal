@@ -53,11 +53,42 @@ namespace CouchSignal.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("CouchSignal.Models.Task", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("DeviceID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("DeviceID");
+
+                    b.ToTable("Tasks");
+                });
+
             modelBuilder.Entity("CouchSignal.Models.Device", b =>
                 {
                     b.HasOne("CouchSignal.Models.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CouchSignal.Models.Task", b =>
+                {
+                    b.HasOne("CouchSignal.Models.Device", "Device")
+                        .WithMany()
+                        .HasForeignKey("DeviceID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

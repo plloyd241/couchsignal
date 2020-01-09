@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CouchSignal.Data;
 using CouchSignal.Models;
+using DeviceTask = CouchSignal.Models.Task;
 
 namespace CouchSignal.Controllers
 {
@@ -102,9 +103,74 @@ namespace CouchSignal.Controllers
             return device;
         }
 
+        // GET: api/Devices/5/Tasks
+        [HttpGet("{deviceId}/Tasks")]
+        public async Task<ActionResult<IEnumerable<DeviceTask>>> GetTasks(long deviceID)
+        {
+            var device = await _context.Devices.FindAsync(deviceID);
+
+            if (device == null)
+            {
+                return NotFound();
+            }
+
+            return device.Tasks;
+        }
+
+        // GET: api/Devices/5/Tasks/2
+        [HttpGet("{deviceId}/Tasks/{id}")]
+        public async Task<ActionResult<DeviceTask>> GetTask(long deviceID, long id)
+        {
+            var task = await _context.Tasks
+                .Where(t => t.DeviceID == deviceID)
+                .Where(t => t.ID == id)
+                .FirstAsync();
+
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return task;
+        }
+
+        [HttpPut("{deviceId}/Tasks/{id}")]
+        public async Task<IActionResult> PutTask(long id, DeviceTask task)
+        {
+            if (id != task.ID)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(task).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TaskExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         private bool DeviceExists(long id)
         {
             return _context.Devices.Any(e => e.ID == id);
+        }
+
+        private bool TaskExists(long id)
+        {
+            return _context.Tasks.Any(e => e.ID == id);
         }
     }
 }

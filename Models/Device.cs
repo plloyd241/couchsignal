@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CouchSignal.Models
@@ -14,5 +15,7 @@ namespace CouchSignal.Models
         [Required]
         public long RoleID { get; set; }
         public Role Role { get; set; }
+
+        public List<Task> Tasks { get; set; }
     }
 }

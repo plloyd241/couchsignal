@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CouchSignal.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200109043222_AddTasks")]
+    [Migration("20200109044437_AddTasks")]
     partial class AddTasks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace CouchSignal.Migrations
 
             modelBuilder.Entity("CouchSignal.Models.Device", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -31,26 +31,26 @@ namespace CouchSignal.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("RoleId")
+                    b.Property<long>("RoleID")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleID");
 
                     b.ToTable("Devices");
                 });
 
             modelBuilder.Entity("CouchSignal.Models.Role", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Roles");
                 });
@@ -59,7 +59,7 @@ namespace CouchSignal.Migrations
                 {
                     b.HasOne("CouchSignal.Models.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("RoleID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

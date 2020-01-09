@@ -5,11 +5,14 @@ namespace CouchSignal.Models
 {
     public class Device
     {
-        public long ID { get; set; }
+        public long Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Address { get; set; }
 
-        public long RoleID { get; set; }
+        [Required]
+        public long RoleId { get; set; }
         public Role Role { get; set; }
     }
 }

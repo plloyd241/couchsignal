@@ -48,7 +48,7 @@ namespace CouchSignal.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDevice(long id, Device device)
         {
-            if (id != device.Id)
+            if (id != device.ID)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace CouchSignal.Controllers
             _context.Devices.Add(device);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDevice", new { id = device.Id }, device);
+            return CreatedAtAction("GetDevice", new { id = device.ID }, device);
         }
 
         // DELETE: api/Devices/5
@@ -104,7 +104,7 @@ namespace CouchSignal.Controllers
 
         private bool DeviceExists(long id)
         {
-            return _context.Devices.Any(e => e.Id == id);
+            return _context.Devices.Any(e => e.ID == id);
         }
     }
 }

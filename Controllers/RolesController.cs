@@ -48,7 +48,7 @@ namespace CouchSignal.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRole(long id, Role role)
         {
-            if (id != role.Id)
+            if (id != role.ID)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace CouchSignal.Controllers
             _context.Roles.Add(role);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRole", new { id = role.Id }, role);
+            return CreatedAtAction("GetRole", new { id = role.ID }, role);
         }
 
         // DELETE: api/Roles/5
@@ -104,7 +104,7 @@ namespace CouchSignal.Controllers
 
         private bool RoleExists(long id)
         {
-            return _context.Roles.Any(e => e.Id == id);
+            return _context.Roles.Any(e => e.ID == id);
         }
     }
 }

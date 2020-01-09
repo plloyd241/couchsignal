@@ -8,11 +8,11 @@ namespace CouchSignal.Models
 
     public class Task
     {
-        public long Id { get; set; }
+        public long ID { get; set; }
         public string Name { get; set; }
         public TaskTypes Type { get; set; }
 
-        public long DeviceId { get; set; }
+        public long DeviceID { get; set; }
         public Device Device { get; set; }
     }
 }

@@ -104,7 +104,7 @@ namespace CouchSignal.Controllers
         }
 
         // GET: api/Devices/5/Tasks
-        [HttpGet("{deviceId}/Tasks")]
+        [HttpGet("{deviceID}/Tasks")]
         public async Task<ActionResult<IEnumerable<DeviceTask>>> GetTasks(long deviceID)
         {
             var device = await _context.Devices.FindAsync(deviceID);
@@ -118,7 +118,7 @@ namespace CouchSignal.Controllers
         }
 
         // GET: api/Devices/5/Tasks/2
-        [HttpGet("{deviceId}/Tasks/{id}")]
+        [HttpGet("{deviceID}/Tasks/{id}")]
         public async Task<ActionResult<DeviceTask>> GetTask(long deviceID, long id)
         {
             var task = await _context.Tasks
@@ -134,7 +134,7 @@ namespace CouchSignal.Controllers
             return task;
         }
 
-        [HttpPut("{deviceId}/Tasks/{id}")]
+        [HttpPut("{deviceID}/Tasks/{id}")]
         public async Task<IActionResult> PutTask(long id, DeviceTask task)
         {
             if (id != task.ID)
